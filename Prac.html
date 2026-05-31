@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Travel Website</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      background:white;
+      text-align:center;
+      padding:40px;
+    }
+
+    h1{
+      color:#66c7f4;
+      font-size:60px;
+      margin-bottom:30px;
+    }
+
+    .container{
+      display:flex;
+      justify-content:center;
+      gap:30px;
+      flex-wrap:wrap;
+      margin-bottom:30px;
+    }
+
+    .card{
+      width:400px;
+      border:4px solid #8dd8ff;
+      border-radius:15px;
+      overflow:hidden;
+      background:white;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .card img{
+      width:100%;
+      height:250px;
+      object-fit:cover;
+    }
+
+    p{
+      font-size:24px;
+      color:gray;
+      width:80%;
+      margin:0 auto 30px;
+      line-height:1.5;
+    }
+
+    button{
+      background:#66c7f4;
+      color:white;
+      border:none;
+      padding:15px 35px;
+      font-size:22px;
+      border-radius:10px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    button:hover{
+      background:#3bb5ee;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>My Travel Website</h1>
+
+  <div class="container">
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
+           alt="Beach">
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98"
+           alt="Travel Beach">
+    </div>
+
+  </div>
+
+  <p>
+    Travelling helps us explore new places, experience different cultures,
+    and create unforgettable memories with friends and family.
+  </p>
+
+  <button onclick="explorePlace()">Explore</button>
+
+  <script>
+    function explorePlace() {
+      alert("Welcome to the Travel Website!");
+    }
+  </script>
+
+</body>
+</html>
