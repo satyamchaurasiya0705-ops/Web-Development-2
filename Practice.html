@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title> Amazon Clone</title>
+
+<!-- React -->
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+<!-- Babel -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<!-- Font Awesome -->
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+body{
+  background:#eaeded;
+}
+
+/* NAVBAR */
+
+.navbar{
+  background:#131921;
+  color:white;
+  padding:15px 25px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.logo{
+  color:#ff9900;
+  font-size:32px;
+  font-weight:bold;
+}
+
+.search-container{
+  display:flex;
+  width:50%;
+}
+
+.search-container input{
+  width:100%;
+  padding:12px;
+  border:none;
+  outline:none;
+  font-size:16px;
+}
+
+.search-btn{
+  background:#febd69;
+  padding:12px 18px;
+  border:none;
+  cursor:pointer;
+}
+
+.nav-icons{
+  display:flex;
+  align-items:center;
+  gap:25px;
+  font-size:20px;
+}
+
+/* HERO */
+
+.hero{
+  height:420px;
+  background:
+  linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+  url('https://images.unsplash.com/photo-1523275335684-37898b6baf30')
+  center/cover;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:white;
+  font-size:60px;
+  font-weight:bold;
+  text-align:center;
+}
+
+/* CATEGORY */
+
+.categories{
+  display:flex;
+  gap:15px;
+  overflow-x:auto;
+  padding:20px;
+  background:white;
+}
+
+.category{
+  background:#f3f3f3;
+  padding:12px 25px;
+  border-radius:30px;
+  cursor:pointer;
+  white-space:nowrap;
+  transition:0.3s;
+}
+
+.category:hover{
+  background:#ff9900;
+  color:white;
+}
+
+/* PRODUCTS */
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+  padding:30px;
+}
+
+.product{
+  background:white;
+  border-radius:10px;
+  overflow:hidden;
+  transition:0.3s;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.product:hover{
+  transform:translateY(-5px);
+}
+
+.product img{
+  width:100%;
+  height:250px;
+  object-fit:contain;
+  background:white;
+  padding:20px;
+}
+
+.product-info{
+  padding:20px;
+}
+
+.product-title{
+  font-size:20px;
+  margin-bottom:10px;
+}
+
+.rating{
+  color:#ffa41c;
+  margin-bottom:10px;
+}
+
+.price{
+  color:#B12704;
+  font-size:26px;
+  margin-bottom:15px;
+}
+
+.old-price{
+  color:gray;
+  text-decoration:line-through;
+  font-size:16px;
+  margin-left:10px;
+}
+
+.btn{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  background:#ffd814;
+  font-size:16px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.btn:hover{
+  background:#f7ca00;
+}
+
+/* CART */
+
+.cart-panel{
+  position:fixed;
+  right:0;
+  top:0;
+  width:380px;
+  height:100%;
+  background:white;
+  box-shadow:-5px 0 10px rgba(0,0,0,0.2);
+  padding:20px;
+  overflow-y:auto;
+  z-index:2000;
+}
+
+.cart-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.close-btn{
+  background:red;
+  color:white;
+  border:none;
+  padding:8px 12px;
+  cursor:pointer;
+}
+
+.cart-item{
+  display:flex;
+  gap:15px;
+  margin-bottom:20px;
+  border-bottom:1px solid #ddd;
+  padding-bottom:15px;
+}
+
+.cart-item img{
+  width:80px;
+  height:80px;
+  object-fit:contain;
+}
+
+.remove-btn{
+  background:red;
+  color:white;
+  border:none;
+  padding:8px 10px;
+  cursor:pointer;
+  border-radius:5px;
+}
+
+.total{
+  font-size:28px;
+  font-weight:bold;
+  margin-top:20px;
+}
+
+/* FOOTER */
+
+.footer{
+  background:#131921;
+  color:white;
+  text-align:center;
+  padding:30px;
+  margin-top:40px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .navbar{
+    flex-direction:column;
+    gap:15px;
+  }
+
+  .search-container{
+    width:100%;
+  }
+
+  .hero{
+    font-size:35px;
+    padding:20px;
+  }
+
+  .cart-panel{
+    width:100%;
+  }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+const { useState } = React;
+
+function App(){
+
+  const [cart,setCart] = useState([]);
+  const [showCart,setShowCart] = useState(false);
+  const [search,setSearch] = useState("");
+
+  const products = [
+
+    {
+      id:1,
+      name:"iPhone 15 Pro",
+      price:999,
+      oldPrice:1200,
+      rating:"★★★★★",
+      image:"https://m.media-amazon.com/images/I/71d7rfSl0wL._SX679_.jpg"
+    },
+
+    {
+      id:2,
+      name:"Sony Headphones",
+      price:299,
+      oldPrice:399,
+      rating:"★★★★☆",
+      image:"https://m.media-amazon.com/images/I/61CGHv6kmWL._SX522_.jpg"
+    },
+
+    {
+      id:3,
+      name:"Gaming Laptop",
+      price:1499,
+      oldPrice:1799,
+      rating:"★★★★★",
+      image:"https://m.media-amazon.com/images/I/71an9eiBxpL._SX679_.jpg"
+    },
+
+    {
+      id:4,
+      name:"Apple Watch",
+      price:199,
+      oldPrice:249,
+      rating:"★★★★☆",
+      image:"https://m.media-amazon.com/images/I/61ZjlBOp+rL._SX679_.jpg"
+    },
+
+    {
+      id:5,
+      name:"Canon Camera",
+      price:899,
+      oldPrice:1099,
+      rating:"★★★★★",
+      image:"https://m.media-amazon.com/images/I/914hFeTU2-L._SX679_.jpg"
+    }
+
+  ];
+
+  const addToCart = (product)=>{
+
+    setCart([...cart,product]);
+  };
+
+  const removeFromCart = (index)=>{
+
+    const updated = [...cart];
+
+    updated.splice(index,1);
+
+    setCart(updated);
+  };
+
+  const total = cart.reduce(
+    (sum,item)=>sum + item.price,
+    0
+  );
+
+  const filteredProducts = products.filter(product=>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return(
+
+    <div>
+
+      {/* NAVBAR */}
+
+      <div className="navbar">
+
+        <div className="logo">
+          amazon
+        </div>
+
+        <div className="search-container">
+
+          <input
+            type="text"
+            placeholder="Search Amazon"
+            value={search}
+            onChange={(e)=>setSearch(e.target.value)}
+          />
+
+          <button className="search-btn">
+
+            <i className="fa fa-search"></i>
+
+          </button>
+
+        </div>
+
+        <div className="nav-icons">
+
+          <div>
+            <i className="fa fa-user"></i>
+          </div>
+
+          <div
+            style={{cursor:"pointer"}}
+            onClick={()=>setShowCart(true)}
+          >
+            <i className="fa fa-cart-shopping"></i>
+
+            {" "} {cart.length}
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* HERO */}
+
+      <div className="hero">
+
+        MEGA AMAZON SALE
+
+      </div>
+
+      {/* CATEGORY */}
+
+      <div className="categories">
+
+        <div className="category">Electronics</div>
+        <div className="category">Fashion</div>
+        <div className="category">Gaming</div>
+        <div className="category">Mobiles</div>
+        <div className="category">Accessories</div>
+        <div className="category">Home</div>
+
+      </div>
+
+      {/* PRODUCTS */}
+
+      <div className="products">
+
+        {
+          filteredProducts.map(product=>(
+
+            <div
+              className="product"
+              key={product.id}
+            >
+
+              <img src={product.image} />
+
+              <div className="product-info">
+
+                <div className="product-title">
+
+                  {product.name}
+
+                </div>
+
+                <div className="rating">
+
+                  {product.rating}
+
+                </div>
+
+                <div className="price">
+
+                  ${product.price}
+
+                  <span className="old-price">
+
+                    ${product.oldPrice}
+
+                  </span>
+
+                </div>
+
+                <button
+                  className="btn"
+                  onClick={()=>addToCart(product)}
+                >
+
+                  Add To Cart
+
+                </button>
+
+              </div>
+
+            </div>
+          ))
+        }
+
+      </div>
+
+      {/* CART PANEL */}
+
+      {
+        showCart && (
+
+          <div className="cart-panel">
+
+            <div className="cart-header">
+
+              <h2>Your Cart</h2>
+
+              <button
+                className="close-btn"
+                onClick={()=>setShowCart(false)}
+              >
+                X
+              </button>
+
+            </div>
+
+            {
+              cart.length === 0
+              ?
+              <h3>Cart is Empty</h3>
+              :
+              cart.map((item,index)=>(
+
+                <div
+                  className="cart-item"
+                  key={index}
+                >
+
+                  <img src={item.image} />
+
+                  <div>
+
+                    <h4>{item.name}</h4>
+
+                    <p>${item.price}</p>
+
+                    <button
+                      className="remove-btn"
+                      onClick={()=>removeFromCart(index)}
+                    >
+
+                      Remove
+
+                    </button>
+
+                  </div>
+
+                </div>
+              ))
+            }
+
+            <div className="total">
+
+              Total: ${total}
+
+            </div>
+
+          </div>
+        )
+      }
+
+      {/* FOOTER */}
+
+      <div className="footer">
+
+        © 2026 Amazon Clone Built With React
+
+      </div>
+
+    </div>
+  );
+}
+
+ReactDOM.createRoot(
+  document.getElementById("root")
+).render(<App />);
+
+</script>
+
+</body>
+</html>
