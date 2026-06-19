@@ -1,0 +1,45 @@
+body  { 
+margin :  0 ; 
+padding :  0 ; 
+font-family :  Arial ,  sans-serif ; 
+background :  #f0f4f8 ; 
+display :  flex ; 
+justify-content :  center ; 
+align-items :  center ; 
+height :  100vh ; 
+} 
+/* Parent container */ 
+.container  { 
+text-align :  center ; 
+border :  2px  solid  black ; 
+padding :  20px  40px ; 
+border-radius :  10px ; 
+background :  white ; 
+} 
+/* Heading */ 
+.container  h1  { 
+margin-bottom :  20px ; 
+} 
+/* Invite card */ 
+.Invite  { 
+background :  #ffffff ; 
+margin :  15px  auto ; 
+padding :  15px ; 
+width :  250px ; 
+border-radius :  10px ; 
+/* Blue shadow */ 
+box-shadow :  0px  4px  15px  rgba( 0 ,  0 ,  255 ,  0.3 ); 
+transition : transform  0.2s ; 
+} 
+/* Hover effect (optional but makes it attractive) */ 
+.Invite:hover  { 
+transform : scale( 1.05 ); 
+} 
+/* Text styling */ 
+.Invite  h1  { 
+font-size :  20px ; 
+margin-bottom :  10px ; 
+} 
+.Invite  p  { 
+margin :  5px  0 ; 
+}
